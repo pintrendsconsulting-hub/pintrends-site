@@ -5,7 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact — PinTrends</title>
 
-  <!-- SAME STYLES AS INDEX -->
+  <style>
+    :root {
+      --text:#111;
+      --muted:#555;
+      --border:#eaeaea;
+      --bg:#fff;
+    }
+
+    * { box-sizing:border-box; }
+
+    body {
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header {
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .nav-left a {
+      margin-right:24px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:500;
+      font-size:15px;
+    }
+
+    .brand {
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:0.02em;
+    }
+
+    .container {
+      max-width:960px;
+      margin:0 auto;
+      padding:96px 24px;
+    }
+
+    h1 {
+      font-size:40px;
+      margin-bottom:24px;
+    }
+
+    p {
+      font-size:18px;
+      line-height:1.6;
+      max-width:720px;
+      color:var(--muted);
+    }
+
+    .button {
+      display:inline-block;
+      margin-top:36px;
+      padding:14px 28px;
+      background:#111;
+      color:#fff;
+      text-decoration:none;
+      border-radius:6px;
+      font-weight:500;
+    }
+
+    footer {
+      border-top:1px solid var(--border);
+      padding:48px 24px;
+    }
+
+    .footer-container {
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .footer-links a {
+      margin-left:16px;
+      text-decoration:none;
+      color:var(--muted);
+    }
+  </style>
 </head>
 
 <body>
@@ -25,12 +117,13 @@
   <h1>Let’s Connect</h1>
 
   <p>
-    The first step is a conversation to see if we’re the right fit.
+    The first step is a conversation to see if we’re a good fit.
     Reach out and tell me a bit about your business and goals.
   </p>
 
-  <a class="button"
-     href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let’s%20Connect">
+  <a
+    class="button"
+    href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let’s%20Connect">
     Email PinTrends
   </a>
 </main>
