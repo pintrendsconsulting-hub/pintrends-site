@@ -11,9 +11,10 @@
       --text:#111111;
       --muted:#5a5a5a;
       --border:#eaeaea;
-      --panel:#fafafa;
     }
+
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
@@ -21,35 +22,67 @@
       color:var(--text);
     }
 
-    header{ border-bottom:1px solid var(--border); background:var(--bg); }
+    /* ===== Header ===== */
+    header{
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
     .nav-container{
-      max-width:1100px; margin:0 auto; padding:18px 24px;
-      display:flex; align-items:center; justify-content:space-between;
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
     .brand{
-      text-decoration:none; color:var(--text);
-      font-size:18px; font-weight:650; letter-spacing:0.02em;
+      text-decoration:none;
+      color:var(--text);
+      font-size:18px;
+      font-weight:650;
+      letter-spacing:0.02em;
     }
-    .nav-links{ display:flex; gap:24px; align-items:center; }
+    .nav-links{
+      display:flex;
+      gap:24px;
+      align-items:center;
+    }
     .nav-link{
-      font-size:15px; font-weight:500; text-decoration:none; color:var(--muted);
-      padding-bottom:6px; border-bottom:2px solid transparent;
+      font-size:15px;
+      font-weight:500;
+      text-decoration:none;
+      color:var(--muted);
+      padding-bottom:6px;
+      border-bottom:2px solid transparent;
       transition:color .18s ease, border-color .18s ease;
     }
-    .nav-link:hover{ color:var(--text); border-bottom-color:var(--text); }
-    .nav-link:active{ color:var(--text); }
-    .nav-link.active{ color:var(--text); border-bottom-color:var(--text); }
+    .nav-link:hover{
+      color:var(--text);
+      border-bottom-color:var(--text);
+    }
+    .nav-link.active{
+      color:var(--text);
+      border-bottom-color:var(--text);
+    }
 
+    /* ===== Layout ===== */
     main.container{
-      max-width:960px; margin:0 auto; padding:88px 24px;
+      max-width:960px;
+      margin:0 auto;
+      padding:88px 24px;
     }
     h1{
-      font-size:44px; line-height:1.1; letter-spacing:-0.02em;
+      font-size:44px;
+      line-height:1.1;
+      letter-spacing:-0.02em;
       margin:0 0 18px 0;
     }
     p{
-      font-size:18px; line-height:1.7; color:var(--muted);
-      max-width:760px; margin:0 0 18px 0;
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
+      max-width:760px;
+      margin:0 0 22px 0;
     }
 
     .button{
@@ -67,26 +100,36 @@
     .button:hover{ opacity:.92; }
     .button:active{ transform:translateY(1px); }
 
-    .note{
-      margin-top:18px;
-      font-size:14px;
-      color:var(--muted);
+    /* ===== Footer ===== */
+    footer{
+      border-top:1px solid var(--border);
+      background:var(--bg);
     }
-
-    footer{ border-top:1px solid var(--border); background:var(--bg); }
     .footer-container{
-      max-width:1100px; margin:0 auto; padding:34px 24px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; color:var(--muted); font-size:14px; flex-wrap:wrap;
+      max-width:1100px;
+      margin:0 auto;
+      padding:34px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      color:var(--muted);
+      font-size:14px;
+      flex-wrap:wrap;
     }
     .footer-links a{
-      color:var(--muted); text-decoration:none; margin-left:16px;
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:16px;
       border-bottom:1px solid transparent;
       transition:color .18s ease, border-color .18s ease;
     }
-    .footer-links a:hover{ color:var(--text); border-bottom-color:var(--text); }
+    .footer-links a:hover{
+      color:var(--text);
+      border-bottom-color:var(--text);
+    }
 
-    @media (max-width: 640px){
+    @media (max-width:640px){
       h1{ font-size:36px; }
       .nav-links{ gap:16px; }
       .nav-link{ font-size:14px; }
@@ -97,48 +140,47 @@
 </head>
 
 <body>
-  <header>
-    <div class="nav-container">
-      <a class="brand" href="index.html">PinTrends</a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link active">Contact</a>
-      </nav>
+
+<header>
+  <div class="nav-container">
+    <a class="brand" href="index.html">PinTrends</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Let’s Connect</h1>
+
+  <p>
+    The first step is a conversation to see if we’re a good fit.
+    If you’re interested in working together, reach out and share a bit about your business and goals.
+  </p>
+
+  <a
+    class="button"
+    href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let%27s%20Connect">
+    Email PinTrends
+  </a>
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div>© <span id="year"></span> PinTrends</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </div>
-  </header>
+  </div>
+</footer>
 
-  <main class="container">
-    <h1>Let’s Connect</h1>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
-    <p>
-      The first step is a quick conversation to see if we’re the right fit.
-      Email me a short note about your business, your goals, and what you’ve tried so far.
-    </p>
-
-    <a class="button"
-       href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let%27s%20Connect">
-      Email PinTrends
-    </a>
-
-    <div class="note">
-      Prefer a simple opener? “Hi — I’d love to see if we’re a fit to work together on Pinterest.”
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div>© <span id="year"></span> PinTrends</div>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
