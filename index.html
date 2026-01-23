@@ -6,234 +6,324 @@
   <title>PinTrends</title>
 
   <style>
-    :root {
-      --text:#111;
-      --muted:#555;
+    :root{
+      --bg:#ffffff;
+      --text:#111111;
+      --muted:#5a5a5a;
       --border:#eaeaea;
-      --bg:#fff;
+      --panel:#fafafa;
     }
 
-    * { box-sizing:border-box; }
+    *{ box-sizing:border-box; }
 
-    body {
+    body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
     }
 
-    header {
+    /* ===== Header ===== */
+    header{
       border-bottom:1px solid var(--border);
+      background:var(--bg);
     }
-
-    .nav-container {
+    .nav-container{
       max-width:1100px;
       margin:0 auto;
-      padding:24px;
+      padding:18px 24px;
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
     }
-
-    .nav-left a {
-      margin-right:24px;
+    .brand{
       text-decoration:none;
       color:var(--text);
-      font-weight:500;
-      font-size:15px;
-    }
-
-    .brand {
       font-size:18px;
-      font-weight:600;
+      font-weight:650;
       letter-spacing:0.02em;
     }
+    .nav-links{
+      display:flex;
+      gap:24px;
+      align-items:center;
+    }
+    .nav-link{
+      font-size:15px;
+      font-weight:500;
+      text-decoration:none;
+      color:var(--muted);
+      padding-bottom:6px;
+      border-bottom:2px solid transparent;
+      transition:color .18s ease, border-color .18s ease;
+    }
+    .nav-link:hover{
+      color:var(--text);
+      border-bottom-color:var(--text);
+    }
+    .nav-link:active{
+      color:var(--text);
+    }
+    .nav-link.active{
+      color:var(--text);
+      border-bottom-color:var(--text);
+    }
 
-    .container {
+    /* ===== Layout ===== */
+    main.container{
       max-width:960px;
       margin:0 auto;
-      padding:96px 24px;
+      padding:88px 24px;
     }
 
-    h1 {
-      font-size:48px;
-      line-height:1.1;
-      margin-bottom:24px;
-      letter-spacing:-0.02em;
+    h1{
+      font-size:52px;
+      line-height:1.05;
+      letter-spacing:-0.03em;
+      margin:0 0 22px 0;
     }
-
-    h2 {
-      font-size:28px;
-      margin-bottom:24px;
-    }
-
-    p {
+    p{
       font-size:18px;
-      line-height:1.6;
-      max-width:720px;
+      line-height:1.65;
       color:var(--muted);
+      max-width:760px;
+      margin:0;
     }
 
-    .button {
+    .cta{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      margin-top:32px;
+      flex-wrap:wrap;
+    }
+    .button{
       display:inline-block;
-      margin-top:36px;
-      padding:14px 28px;
-      background:#111;
+      padding:14px 22px;
+      background:var(--text);
       color:#fff;
       text-decoration:none;
-      border-radius:6px;
-      font-weight:500;
+      border-radius:10px;
+      font-size:16px;
+      font-weight:600;
+      letter-spacing:0.01em;
+      transition:transform .12s ease, opacity .12s ease;
     }
+    .button:hover{ opacity:.92; }
+    .button:active{ transform:translateY(1px); }
 
-    .section {
-      margin-top:120px;
-    }
-
-    ul {
-      list-style:none;
-      padding:0;
-      margin:0;
-      max-width:720px;
-    }
-
-    li {
-      padding:14px 0;
-      font-size:18px;
-      border-bottom:1px solid var(--border);
-    }
-
-    details {
-      border:1px solid var(--border);
-      border-radius:8px;
-      padding:24px;
-      background:#fafafa;
-      max-width:720px;
-    }
-
-    details + details {
-      margin-top:24px;
-    }
-
-    summary {
-      font-size:20px;
-      font-weight:500;
-      cursor:pointer;
-      list-style:none;
-    }
-
-    summary::-webkit-details-marker { display:none; }
-
-    summary::after {
-      content:"+";
-      float:right;
-    }
-
-    details[open] summary::after {
-      content:"–";
-    }
-
-    footer {
-      border-top:1px solid var(--border);
-      padding:48px 24px;
-    }
-
-    .footer-container {
-      max-width:1100px;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
+    .helper{
       font-size:14px;
       color:var(--muted);
     }
 
-    .footer-links a {
-      margin-left:16px;
-      text-decoration:none;
+    .section{
+      margin-top:96px;
+    }
+    h2{
+      font-size:28px;
+      margin:0 0 18px 0;
+      letter-spacing:-0.01em;
+    }
+
+    ul.clean{
+      list-style:none;
+      padding:0;
+      margin:0;
+      max-width:760px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:var(--bg);
+    }
+    ul.clean li{
+      padding:16px 18px;
+      border-bottom:1px solid var(--border);
+      font-size:17px;
+      line-height:1.5;
+    }
+    ul.clean li:last-child{ border-bottom:none; }
+
+    /* ===== Dropdown (details) ===== */
+    .stack{
+      max-width:760px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--panel);
+      padding:16px 18px;
+    }
+    summary{
+      cursor:pointer;
+      font-size:17px;
+      font-weight:600;
+      color:var(--text);
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    summary::after{
+      content:"+";
+      font-size:20px;
+      line-height:1;
       color:var(--muted);
+    }
+    details[open] summary::after{
+      content:"–";
+    }
+    details .content{
+      margin-top:14px;
+    }
+    details .content ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    details .content li{
+      padding:10px 0;
+      border-bottom:1px solid var(--border);
+      font-size:16px;
+      color:var(--muted);
+    }
+    details .content li:last-child{ border-bottom:none; }
+
+    /* ===== Footer ===== */
+    footer{
+      border-top:1px solid var(--border);
+      background:var(--bg);
+    }
+    .footer-container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:34px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      color:var(--muted);
+      font-size:14px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:16px;
+      border-bottom:1px solid transparent;
+      transition:color .18s ease, border-color .18s ease;
+    }
+    .footer-links a:hover{
+      color:var(--text);
+      border-bottom-color:var(--text);
+    }
+
+    /* ===== Mobile tweaks ===== */
+    @media (max-width: 640px){
+      h1{ font-size:40px; }
+      .nav-links{ gap:16px; }
+      .nav-link{ font-size:14px; }
+      main.container{ padding:64px 18px; }
+      .nav-container{ padding:16px 18px; }
     }
   </style>
 </head>
 
 <body>
-
-<header>
-  <div class="nav-container">
-    <div class="nav-left">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+  <header>
+    <div class="nav-container">
+      <a class="brand" href="index.html">PinTrends</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
     </div>
-    <div class="brand">PinTrends</div>
-  </div>
-</header>
+  </header>
 
-<main class="container">
+  <main class="container">
+    <h1>Pinterest search &amp; analytics for brands that want traffic that converts</h1>
 
-  <h1>Pinterest search & analytics for brands that want traffic that converts</h1>
+    <p>
+      PinTrends helps service-based businesses and creators structure their Pinterest presence
+      so their content actually gets found — and drives long-term traffic.
+    </p>
 
-  <p>
-    PinTrends helps service-based businesses and creators structure their Pinterest presence
-    so their content actually gets found — and drives long-term traffic.
-  </p>
-
-  <a class="button"
-     href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let’s%20Connect">
-    Let’s Connect
-  </a>
-
-  <div class="section">
-    <h2>What I Help With</h2>
-    <ul>
-      <li>Pinterest keyword & search audits</li>
-      <li>Board and profile restructuring</li>
-      <li>Content strategy for long-term traffic</li>
-      <li>Analytics review & optimization</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Is This a Fit?</h2>
-
-    <details>
-      <summary>Who This Is For</summary>
-      <ul>
-        <li>Service-based businesses and creators</li>
-        <li>Brands already producing content</li>
-        <li>Founders who value strategy over shortcuts</li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>Who This Is Not For</summary>
-      <ul>
-        <li>Anyone chasing overnight results</li>
-        <li>Brands unwilling to implement strategy</li>
-        <li>Businesses not ready for long-term growth</li>
-      </ul>
-    </details>
-  </div>
-
-  <div class="section">
-    <h2>How It Works</h2>
-    <ul>
-      <li><strong>Step 1:</strong> Initial fit call</li>
-      <li><strong>Step 2:</strong> Strategy & game plan</li>
-      <li><strong>Step 3:</strong> Five-week implementation</li>
-    </ul>
-  </div>
-
-</main>
-
-<footer>
-  <div class="footer-container">
-    <div>© PinTrends</div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+    <div class="cta">
+      <a class="button"
+         href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let%27s%20Connect">
+        Let’s Connect
+      </a>
+      <span class="helper">First step: a quick conversation to see if we’re a fit.</span>
     </div>
-  </div>
-</footer>
 
+    <section class="section">
+      <h2>What I Help With</h2>
+      <ul class="clean">
+        <li>Pinterest keyword &amp; search audits</li>
+        <li>Board and profile restructuring</li>
+        <li>Content strategy for long-term traffic</li>
+        <li>Analytics review &amp; optimization</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Is This a Fit?</h2>
+
+      <div class="stack">
+        <details>
+          <summary>Who This Is For</summary>
+          <div class="content">
+            <ul>
+              <li>Service-based businesses and creators who want sustainable Pinterest traffic</li>
+              <li>Brands already creating content but lacking consistent search visibility</li>
+              <li>Founders who want structure, strategy, and long-term performance</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Who This Is Not For</summary>
+          <div class="content">
+            <ul>
+              <li>Anyone looking for overnight or “viral-only” results</li>
+              <li>Brands unwilling to implement strategic changes</li>
+              <li>Businesses not ready to treat Pinterest as a long-term channel</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How It Works</h2>
+      <ul class="clean">
+        <li><strong>Step 1:</strong> Initial fit call to confirm goals, scope, and alignment.</li>
+        <li><strong>Step 2:</strong> I create a clear game plan tailored to your business + Pinterest search intent.</li>
+        <li><strong>Step 3:</strong> We put it into motion through a five-week working engagement to implement &amp; optimize.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div>© <span id="year"></span> PinTrends</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // tiny convenience: always current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
