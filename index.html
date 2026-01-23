@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PinTrends</title>
+
+  <style>
+    :root {
+      --text: #111;
+      --muted: #555;
+      --border: #eaeaea;
+      --bg: #ffffff;
+      --accent: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left a {
+      margin-right: 24px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 96px 24px;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 720px;
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 36px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .section {
+      margin-top: 120px;
+    }
+
+    /* ---------- LISTS ---------- */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 720px;
+    }
+
+    li {
+      font-size: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ---------- DROPDOWN ---------- */
+    details {
+      max-width: 720px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      background: #fafafa;
+    }
+
+    details + details {
+      margin-top: 24px;
+    }
+
+    summary {
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      float: right;
+      font-size: 20px;
+    }
+
+    details[open] summary::after {
+      content: "–";
+    }
+
+    details ul {
+      margin-top: 24px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer-links a {
+      margin-left: 16px;
+      text-decoration: none;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="brand">PinTrends</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <!-- HERO -->
+    <h1>Pinterest search & analytics for brands that want traffic that converts</h1>
+
+    <p>
+      PinTrends helps service-based businesses and creators structure their Pinterest presence
+      so their content actually gets found — and drives long-term traffic.
+    </p>
+
+    <a
+      class="button"
+      href="mailto:pintrends.consulting@gmail.com?subject=PinTrends%20-%20Let’s%20Connect"
+    >
+      Let’s Connect
+    </a>
+
+    <!-- SERVICES -->
+    <div class="section">
+      <h2>What I Help With</h2>
+      <ul>
+        <li>Pinterest keyword & search audits</li>
+        <li>Board and profile restructuring</li>
+        <li>Content strategy for long-term traffic</li>
+        <li>Analytics review & optimization</li>
+      </ul>
+    </div>
+
+    <!-- DROPDOWN: WHO THIS IS FOR -->
+    <div class="section">
+      <h2>Is This a Fit?</h2>
+
+      <details>
+        <summary>Who This Is For</summary>
+        <ul>
+          <li>Service-based businesses and creators seeking long-term Pinterest traffic</li>
+          <li>Brands already publishing content but lacking search visibility</li>
+          <li>Founders who value strategy, structure, and sustainability</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Who This Is Not For</summary>
+        <ul>
+          <li>Anyone looking for overnight or viral results</li>
+          <li>Brands unwilling to implement strategic changes</li>
+          <li>Businesses not ready to treat Pinterest as a long-term channel</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="section">
+      <h2>How It Works</h2>
+      <ul>
+        <li>
+          <strong>Step 1: Initial Fit Call</strong><br />
+          A conversation to understand your business, goals, and alignment.
+        </li>
+        <li>
+          <strong>Step 2: Strategy & Game Plan</strong><br />
+          A clear Pinterest search and analytics roadmap built for your brand.
+        </li>
+        <li>
+          <strong>Step 3: Put It Into Motion</strong><br />
+          A five-week engagement implementing, optimizing, and solidifying your Pinterest foundation.
+        </li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>© PinTrends</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
