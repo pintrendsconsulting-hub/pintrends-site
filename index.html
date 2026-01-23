@@ -321,13 +321,14 @@
       border-radius:18px;
       overflow:hidden;
     }
-    .image-card img{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:cover;
-      aspect-ratio: 16 / 10;
-    }
+.image-card img{
+  width:100%;
+  height:340px;              /* adjust: 280–420 depending on your preference */
+  display:block;
+  object-fit:contain;        /* shows the full image */
+  background:rgba(255,255,255,.02); /* makes letterboxing look intentional */
+  padding:10px;              /* optional: gives breathing room */
+}
     .image-caption{
       padding:16px 18px 18px 18px;
       border-top:1px solid var(--border);
@@ -728,7 +729,7 @@
 <article class="tcard">
   <p class="tquote">
     “The optimization piece changed everything. Instead of posting and hoping, I now know what to create,
-    where it belongs, and how to build visibility over time.”
+    where it belongs, and how to do it with intention.”
   </p>
   <div class="tmeta">
     <span>Taylor — Wedding Photographer</span>
