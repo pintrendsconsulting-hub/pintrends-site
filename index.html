@@ -321,14 +321,14 @@
       border-radius:18px;
       overflow:hidden;
     }
-.image-card img{
-  width:100%;
-  height:340px;              /* adjust: 280–420 depending on your preference */
-  display:block;
-  object-fit:contain;        /* shows the full image */
-  background:rgba(255,255,255,.02); /* makes letterboxing look intentional */
-  padding:10px;              /* optional: gives breathing room */
-}
+    .image-card img{
+      width:100%;
+      height:420px;                 /* bigger preview */
+      display:block;
+      object-fit:contain;            /* fit image (no crop) */
+      background:rgba(255,255,255,.02);
+      padding:10px;
+    }
     .image-caption{
       padding:16px 18px 18px 18px;
       border-top:1px solid var(--border);
@@ -347,6 +347,62 @@
       line-height:1.65;
       color:var(--muted);
       max-width:none;
+    }
+
+    /* IMAGE HOVER EXPAND */
+    .image-expand{
+      position:relative;
+      display:block;
+      cursor:zoom-in;
+      z-index:1;
+    }
+
+    .image-expand::after{
+      content:"View full image";
+      position:absolute;
+      bottom:12px;
+      right:12px;
+      font-size:12px;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      background:rgba(0,0,0,.6);
+      color:#fff;
+      padding:6px 10px;
+      border-radius:999px;
+      opacity:0;
+      transition:opacity .2s ease;
+    }
+
+    .image-expand:hover::after{
+      opacity:1;
+    }
+
+    /* Fullscreen hover preview (desktop only) */
+    @media (hover: hover){
+      .image-expand:hover img{
+        position:fixed;
+        left:50%;
+        top:50%;
+        transform:translate(-50%, -50%);
+        max-width:92vw;
+        max-height:88vh;
+        width:auto;
+        height:auto;
+        z-index:9999;
+        background:#0b0b0b;
+        padding:16px;
+        border-radius:16px;
+        box-shadow:0 40px 120px rgba(0,0,0,.6);
+        cursor:zoom-out;
+      }
+
+      .image-expand:hover::before{
+        content:"";
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.65);
+        z-index:9998;
+      }
     }
 
     .carousel{
@@ -516,60 +572,6 @@
         gap:18px;
       }
     }
-    /* IMAGE HOVER EXPAND */
-.image-expand{
-  position:relative;
-  display:block;
-  cursor:zoom-in;
-}
-
-.image-expand::after{
-  content:"View full image";
-  position:absolute;
-  bottom:12px;
-  right:12px;
-  font-size:12px;
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-  background:rgba(0,0,0,.6);
-  color:#fff;
-  padding:6px 10px;
-  border-radius:999px;
-  opacity:0;
-  transition:opacity .2s ease;
-}
-
-.image-expand:hover::after{
-  opacity:1;
-}
-
-/* Fullscreen hover preview (desktop only) */
-@media (hover: hover){
-  .image-expand:hover img{
-    position:fixed;
-    inset:50%;
-    transform:translate(-50%, -50%) scale(1);
-    max-width:92vw;
-    max-height:88vh;
-    width:auto;
-    height:auto;
-    z-index:9999;
-    background:#0b0b0b;
-    padding:16px;
-    border-radius:16px;
-    box-shadow:0 40px 120px rgba(0,0,0,.6);
-    cursor:zoom-out;
-  }
-
-  .image-expand:hover::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.65);
-    z-index:9998;
-  }
-}
-
   </style>
 </head>
 
@@ -602,7 +604,6 @@
     Not trends. Not guesswork.
   </p>
 
-  <!-- PRIMARY CTA -->
   <div class="cta">
     <a class="button" href="why.html">LEARN WHY THIS WORKS</a>
     <span class="cta-subtext">Get the logic behind Pinterest search, analytics, and compounding traffic.</span>
@@ -742,16 +743,15 @@
     </div>
   </section>
 
-  <!-- IMAGE + SWIPE TESTIMONIALS -->
   <section class="section">
-    <h2>Latest REAL data and Testimonials</h2>
+    <h2>Real Data And Testimonials</h2>
 
     <div class="media-grid">
       <div class="image-card">
-        <!-- If your file is PNG, change to realdata.png -->
-      <a href="images/realdata.jpg" class="image-expand" target="_blank">
-  <img src="images/realdata.jpg" alt="PinTrends real data and analytics example." />
-</a>
+        <a href="images/realdata.png" class="image-expand" target="_blank" rel="noopener">
+          <img src="images/realdata.png" alt="PinTrends real data and analytics example." />
+        </a>
+
         <div class="image-caption">
           <div class="kicker">Real Data, Real Direction</div>
           <p>
@@ -770,27 +770,40 @@
         </div>
 
         <div class="track" id="tTrack" aria-label="Swipe through testimonials">
-</article>
 
-<article class="tcard">
-  <p class="tquote">
-    “This was the first time I understood what Pinterest wanted from me. The strategy was clear,
-    the implementation was smooth, and I finally had a repeatable system.”
-  </p>
-  <div class="tmeta">
-    <span>Laura — Wedding Photographer</span>
-  </div>
-</article>
+          <article class="tcard">
+            <p class="tquote">
+              “The board structure and keyword plan made Pinterest finally feel like a real traffic channel.
+              I stopped guessing, and I started building with intention.”
+            </p>
+            <div class="tmeta">
+              <span>Wedding Venue</span>
+              <span>Discovery + Structure</span>
+            </div>
+          </article>
 
-<article class="tcard">
-  <p class="tquote">
-    “The optimization piece changed everything. Instead of posting and hoping, I now know what to create,
-    where it belongs, and how to do it with intention.”
-  </p>
-  <div class="tmeta">
-    <span>Taylor — Wedding Photographer</span>
-  </div>
-</article>
+          <article class="tcard">
+            <p class="tquote">
+              “This was the first time I understood what Pinterest wanted from me. The strategy was clear,
+              the implementation was smooth, and I finally had a repeatable system.”
+            </p>
+            <div class="tmeta">
+              <span>Laura — Wedding Photographer</span>
+              <span>Keywords + Boards</span>
+            </div>
+          </article>
+
+          <article class="tcard">
+            <p class="tquote">
+              “The optimization piece changed everything. Instead of posting and hoping, I now know what to create,
+              where it belongs, and how to do it with intention.”
+            </p>
+            <div class="tmeta">
+              <span>Taylor — Wedding Photographer</span>
+              <span>Optimization + Cadence</span>
+            </div>
+          </article>
+
         </div>
 
         <div class="dots" id="tDots" aria-hidden="true">
@@ -802,7 +815,6 @@
     </div>
   </section>
 
-  <!-- FINAL QUOTE RIGHT BEFORE FOOTER -->
   <div class="statbar" style="margin-bottom:0;">
     <p>Your work is the masterpiece. Strategy decides where it is placed, how high, and who finds it.</p>
   </div>
