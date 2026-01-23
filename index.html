@@ -349,7 +349,22 @@
       max-width:none;
     }
 
-    /* IMAGE CLICK/TOGGLE EXPAND (NO NEW TAB) */
+    /* BACKDROP (CLICK TO CLOSE) */
+    .img-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      opacity:0;
+      pointer-events:none;
+      z-index:9998;
+      transition:opacity .15s ease;
+    }
+    .img-backdrop.active{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    /* IMAGE EXPAND BUTTON */
     .image-expand{
       position:relative;
       display:block;
@@ -358,10 +373,8 @@
       padding:0;
       background:transparent;
       cursor:zoom-in;
-      z-index:1;
       text-align:left;
     }
-
     .image-expand::after{
       content:"View full image";
       position:absolute;
@@ -378,36 +391,12 @@
       transition:opacity .2s ease;
       pointer-events:none;
     }
-
     @media (hover: hover){
       .image-expand:hover::after{ opacity:1; }
-
-      .image-expand:hover img{
-        position:fixed;
-        left:50%;
-        top:50%;
-        transform:translate(-50%, -50%);
-        max-width:92vw;
-        max-height:88vh;
-        width:auto;
-        height:auto;
-        z-index:9999;
-        background:#0b0b0b;
-        padding:16px;
-        border-radius:16px;
-        box-shadow:0 40px 120px rgba(0,0,0,.6);
-        cursor:zoom-out;
-      }
-
-      .image-expand:hover::before{
-        content:"";
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,.65);
-        z-index:9998;
-      }
     }
 
+    /* FULLSCREEN STATE (PREVIEW OR OPEN) */
+    .image-expand.preview img,
     .image-expand.open img{
       position:fixed;
       left:50%;
@@ -423,13 +412,6 @@
       border-radius:16px;
       box-shadow:0 40px 120px rgba(0,0,0,.6);
       cursor:zoom-out;
-    }
-    .image-expand.open::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      z-index:9998;
     }
 
     .carousel{
@@ -577,7 +559,6 @@
       h1{ font-size:42px; }
       main.container{ padding:72px 20px; }
 
-      /* MOBILE HEADER: logo on top, links below */
       .nav-container{
         flex-direction:column;
         gap:16px;
@@ -797,14 +778,6 @@
         </div>
 
         <div class="track" id="tTrack" aria-label="Swipe through testimonials">
-                    <article class="tcard">
-            <p class="tquote">
-              “This was the first time I understood what Pinterest wanted from me. The strategy was clear, and Autumn explained everything really well.”
-            </p>
-            <div class="tmeta">
-              <span>Laura — Wedding Photographer</span>
-            </div>
-          </article>
 
           <article class="tcard">
             <p class="tquote">
@@ -817,8 +790,16 @@
 
           <article class="tcard">
             <p class="tquote">
-              “I felt like I was posting and hoping, I now know what to create,
-              where it belongs, and how to do it.”
+              “This was the first time I understood what Pinterest wanted from me. The strategy was clear, and Autumn explained everything really well.”
+            </p>
+            <div class="tmeta">
+              <span>Laura — Wedding Photographer</span>
+            </div>
+          </article>
+
+          <article class="tcard">
+            <p class="tquote">
+              “I felt like I was posting and hoping. Now I know what to create, where it belongs, and how to do it.”
             </p>
             <div class="tmeta">
               <span>Taylor — Wedding Photographer</span>
@@ -855,6 +836,9 @@
     <div class="footer-right">Built With Intention</div>
   </div>
 </footer>
+
+<!-- Backdrop must be ABOVE closing body and AFTER the content -->
+<div id="imgBackdrop" class="img-backdrop" aria-hidden="true"></div>
 
 <script>
   (function(){
@@ -894,33 +878,64 @@
       setActiveDot();
     }
 
-    /* Image click-to-toggle (no new tab) */
+    /* Image: hover preview + click lock + click backdrop closes */
     const imgBtn = document.querySelector(".image-expand");
-    if(imgBtn){
-      function close(){
+    const backdrop = document.getElementById("imgBackdrop");
+    const canHover = window.matchMedia("(hover: hover)").matches;
+
+    if(imgBtn && backdrop){
+      function showBackdrop(){ backdrop.classList.add("active"); }
+      function hideBackdrop(){ backdrop.classList.remove("active"); }
+
+      function closeAll(){
         imgBtn.classList.remove("open");
+        imgBtn.classList.remove("preview");
+        hideBackdrop();
         imgBtn.setAttribute("aria-label","View full image");
       }
 
+      function openLocked(){
+        imgBtn.classList.add("open");
+        imgBtn.classList.remove("preview");
+        showBackdrop();
+        imgBtn.setAttribute("aria-label","Close full image");
+      }
+
+      function openPreview(){
+        if(imgBtn.classList.contains("open")) return;
+        imgBtn.classList.add("preview");
+        showBackdrop();
+      }
+
+      function closePreview(){
+        if(imgBtn.classList.contains("open")) return;
+        imgBtn.classList.remove("preview");
+        hideBackdrop();
+      }
+
+      // Hover preview (desktop)
+      if(canHover){
+        imgBtn.addEventListener("mouseenter", openPreview);
+        imgBtn.addEventListener("mouseleave", closePreview);
+      }
+
+      // Click toggles locked open/close (all devices)
       imgBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        imgBtn.classList.toggle("open");
-        imgBtn.setAttribute("aria-label", imgBtn.classList.contains("open") ? "Close full image" : "View full image");
+        if(imgBtn.classList.contains("open")) closeAll();
+        else openLocked();
       });
 
-      document.addEventListener("click", (e) => {
-        if(!imgBtn.classList.contains("open")) return;
-        if(imgBtn.contains(e.target)) return;
-        close();
-      });
+      // Click backdrop closes
+      backdrop.addEventListener("click", closeAll);
 
+      // ESC closes
       document.addEventListener("keydown", (e) => {
-        if(e.key === "Escape") close();
+        if(e.key === "Escape") closeAll();
       });
     }
   })();
 </script>
-<div id="imgBackdrop" class="img-backdrop" aria-hidden="true"></div>
 
 </body>
 </html>
