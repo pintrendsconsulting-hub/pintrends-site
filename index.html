@@ -323,9 +323,9 @@
     }
     .image-card img{
       width:100%;
-      height:420px;                 /* bigger preview */
+      height:420px;
       display:block;
-      object-fit:contain;            /* fit image (no crop) */
+      object-fit:contain;
       background:rgba(255,255,255,.02);
       padding:10px;
     }
@@ -349,12 +349,17 @@
       max-width:none;
     }
 
-    /* IMAGE HOVER EXPAND */
+    /* IMAGE CLICK/TOGGLE EXPAND (NO NEW TAB) */
     .image-expand{
       position:relative;
       display:block;
+      width:100%;
+      border:0;
+      padding:0;
+      background:transparent;
       cursor:zoom-in;
       z-index:1;
+      text-align:left;
     }
 
     .image-expand::after{
@@ -371,14 +376,12 @@
       border-radius:999px;
       opacity:0;
       transition:opacity .2s ease;
+      pointer-events:none;
     }
 
-    .image-expand:hover::after{
-      opacity:1;
-    }
-
-    /* Fullscreen hover preview (desktop only) */
     @media (hover: hover){
+      .image-expand:hover::after{ opacity:1; }
+
       .image-expand:hover img{
         position:fixed;
         left:50%;
@@ -403,6 +406,30 @@
         background:rgba(0,0,0,.65);
         z-index:9998;
       }
+    }
+
+    .image-expand.open img{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      max-width:92vw;
+      max-height:88vh;
+      width:auto;
+      height:auto;
+      z-index:9999;
+      background:#0b0b0b;
+      padding:16px;
+      border-radius:16px;
+      box-shadow:0 40px 120px rgba(0,0,0,.6);
+      cursor:zoom-out;
+    }
+    .image-expand.open::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      z-index:9998;
     }
 
     .carousel{
@@ -748,9 +775,9 @@
 
     <div class="media-grid">
       <div class="image-card">
-        <a href="images/realdata.png" class="image-expand" target="_blank" rel="noopener">
+        <button class="image-expand" type="button" aria-label="View full image">
           <img src="images/realdata.png" alt="PinTrends real data and analytics example." />
-        </a>
+        </button>
 
         <div class="image-caption">
           <div class="kicker">Real Data, Real Direction</div>
@@ -837,13 +864,14 @@
 
 <script>
   (function(){
+    /* Testimonials carousel */
     const track = document.getElementById("tTrack");
     const dotsWrap = document.getElementById("tDots");
     const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll(".dot")) : [];
     const buttons = document.querySelectorAll("#testimonials .cbtn");
 
     function cardWidth(){
-      const card = track.querySelector(".tcard");
+      const card = track ? track.querySelector(".tcard") : null;
       if(!card) return 0;
       const styles = getComputedStyle(track);
       const gap = parseFloat(styles.columnGap || styles.gap || 0) || 12;
@@ -851,7 +879,7 @@
     }
 
     function setActiveDot(){
-      if(!dots.length) return;
+      if(!track || !dots.length) return;
       const w = cardWidth() || track.clientWidth;
       const idx = Math.round(track.scrollLeft / w);
       const clamped = Math.max(0, Math.min(dots.length - 1, idx));
@@ -860,17 +888,42 @@
 
     buttons.forEach(btn=>{
       btn.addEventListener("click", ()=>{
+        if(!track) return;
         const dir = parseInt(btn.dataset.dir, 10);
         const w = cardWidth() || track.clientWidth;
         track.scrollBy({ left: dir * w, behavior: "smooth" });
       });
     });
 
-    track.addEventListener("scroll", () => {
-      window.requestAnimationFrame(setActiveDot);
-    });
+    if(track){
+      track.addEventListener("scroll", () => window.requestAnimationFrame(setActiveDot));
+      setActiveDot();
+    }
 
-    setActiveDot();
+    /* Image click-to-toggle (no new tab) */
+    const imgBtn = document.querySelector(".image-expand");
+    if(imgBtn){
+      function close(){
+        imgBtn.classList.remove("open");
+        imgBtn.setAttribute("aria-label","View full image");
+      }
+
+      imgBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        imgBtn.classList.toggle("open");
+        imgBtn.setAttribute("aria-label", imgBtn.classList.contains("open") ? "Close full image" : "View full image");
+      });
+
+      document.addEventListener("click", (e) => {
+        if(!imgBtn.classList.contains("open")) return;
+        if(imgBtn.contains(e.target)) return;
+        close();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if(e.key === "Escape") close();
+      });
+    }
   })();
 </script>
 
